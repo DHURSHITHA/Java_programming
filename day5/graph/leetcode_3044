@@ -1,0 +1,63 @@
+class Solution {
+    boolean isPrime(int ans)
+    {
+        if(ans==2||ans==3) return true;
+        if(ans%2==0) return false;
+        for(int i=3;i*i<=ans;i++)
+        {
+            if(ans%i==0) return false;
+        }
+        return true;
+    }
+    void func(int[][] mat,int cr,int cc,int r,int c,HashMap<Integer,Integer> arr,int ans)
+    {
+        if(cr+r<0||cr+r>=mat.length||cc+c<0||cc+c>=mat[0].length) return;
+        ans=mat[cr+r][cc+c]+(ans*10);
+        if(ans>10&&isPrime(ans)==true)
+        {
+            if(arr.containsKey(ans))
+            {
+                arr.put(ans,arr.get(ans)+1);
+            }
+            else
+            {
+                arr.put(ans,1);
+            }
+        }
+        func(mat,cr+r,cc+c,r,c,arr,ans);
+    }
+    public int mostFrequentPrime(int[][] mat) {
+        HashMap<Integer,Integer> arr=new HashMap<>();
+        for(int i=0;i<mat.length;i++)
+        {
+            for(int j=0;j<mat[0].length;j++)
+            {
+                func(mat,i,j,-1,0,arr,mat[i][j]);//top
+                func(mat,i,j,-1,1,arr,mat[i][j]);//top right;
+                func(mat,i,j,0,1,arr,mat[i][j]);//right;
+                func(mat,i,j,1,1,arr,mat[i][j]);//bottom right;
+                func(mat,i,j,1,0,arr,mat[i][j]);//bottom;
+                func(mat,i,j,1,-1,arr,mat[i][j]);//bottom left
+                func(mat,i,j,0,-1,arr,mat[i][j]);//left;
+                func(mat,i,j,-1,-1,arr,mat[i][j]);//top left
+            }
+        }
+        int max_val=-1;
+        int max_prime=-1;
+        for(int key:arr.keySet())
+        {
+            if(arr.get(key)>max_val)
+            {
+                max_val=arr.get(key);
+                max_prime=key;
+            }
+            else if(arr.get(key)==max_val&&key>max_prime)
+            {
+                max_prime=key;
+            }
+        }
+        System.out.print(arr);
+        return max_prime;
+        
+    }
+}
