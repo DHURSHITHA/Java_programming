@@ -1,0 +1,51 @@
+import java.util.*;
+
+class Main {
+
+    public static boolean isValid(List<List<Character>> q, int r, int c, int n) {
+
+        // column
+        for (int i = 0; i < r; i++)
+            if (q.get(i).get(c) == 'Q') return false;
+
+        // top-left diagonal
+        for (int i = r-1, j = c-1; i >= 0 && j >= 0; i--, j--)
+            if (q.get(i).get(j) == 'Q') return false;
+
+        // top-right diagonal
+        for (int i = r-1, j = c+1; i >= 0 && j < n; i--, j++)
+            if (q.get(i).get(j) == 'Q') return false;
+
+        return true;
+    }
+
+    public static void solve(List<List<Character>> q, int n, int r) {
+
+        if (r == n) {
+            System.out.println(q);
+            return;
+        }
+
+        for (int c = 0; c < n; c++) {
+            if (isValid(q, r, c, n)) {
+                q.get(r).set(c, 'Q');
+                solve(q, n, r + 1);
+                q.get(r).set(c, '.');
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        List<List<Character>> q = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<Character> row = new ArrayList<>();
+            for (int j = 0; j < n; j++) row.add('.');
+            q.add(row);
+        }
+
+        solve(q, n, 0);
+    }
+}
