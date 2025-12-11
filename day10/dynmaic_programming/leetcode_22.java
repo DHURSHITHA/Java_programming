@@ -2,7 +2,7 @@ class Solution {
 
     void func(int n, List<String> res, String curr_bracket, int open, int close) {
 
-        // base case: if string length == 2*n, add result
+        // base case: if string length == 2*n,add result
         if (curr_bracket.length() == 2 * n) {
             res.add(curr_bracket);
             return;
