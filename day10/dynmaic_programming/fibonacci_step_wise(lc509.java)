@@ -1,0 +1,87 @@
+//normal recursive approach(hight space and time)
+class Solution {
+    int recursion_approach(int n)
+    {
+        if(n==0) return 0;
+        if(n==1) return 1;
+        return recursion_approach(n-1)+recursion_approach(n-2);
+    }
+    public int fib(int n) {
+        return recursion_approach(n);
+    }
+}
+
+
+//more time efficient but better space efficient than recursion but can improve more by using tabulation approach
+class Solution {
+    int memoi_approach(int n,int[] memoi)
+    {
+        if(n==0) return 0;
+        if(n==1) return 1;
+        if(memoi[n]!=-1)
+        {
+            return memoi[n];
+        }
+        int val=recursion_approach(n-1,memoi)+recursion_approach(n-2,memoi);
+        memoi[n]=val;
+        return memoi[n];
+    }
+    int wrapper_fun(int n)
+    {
+        int[] memoi=new int[n+1];
+        Arrays.fill(memoi,-1);
+        return recursion_approach(n,memoi);
+    }
+    public int fib(int n) {
+        return wrapper_fun(n);
+    }
+}
+
+
+
+//tabulation approach
+
+class Solution {
+    int tabulation_approach(int n)
+    {
+        int[] memoi=new int[n+1];
+        if(n==0) return 0;
+        if(n==1) return 1;
+        memoi[0]=0;
+        memoi[1]=1;
+        for(int i=2;i<memoi.length;i++)
+        {
+            memoi[i]=memoi[i-1]+memoi[i-2];
+        }
+        return memoi[n];
+    }
+    public int fib(int n) {
+        return tabulation_approach(n);
+    }
+}
+
+
+
+
+//optimized tabulation approach
+class Solution {
+    int optimized_tabulation_approach(int n)
+    {
+        if(n==0) return 0;
+        if(n==1) return 1;
+        int count=1;
+        int start=0,next=1;
+        while(count<n)
+        {
+            int temp=start+next;
+            start=next;
+            next=temp;
+            count++;
+        }
+        return next;
+
+    }
+    public int fib(int n) {
+        return optimized_tabulation_approach(n);
+    }
+}
