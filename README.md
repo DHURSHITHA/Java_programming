@@ -5,6 +5,7 @@ The problems are primarily solved from **LeetCode** and focus on building strong
 and algorithmic thinking skills for coding interviews.
 
 ## Topics Covered
+
 - Arrays & Strings
 - Recursion
 - Backtracking
