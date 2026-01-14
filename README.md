@@ -2,7 +2,7 @@
 
 This repository contains my daily practice solutions for Data Structures and Algorithms problems.
 The problems are primarily solved from **LeetCode** and focus on building strong problem-solving
-and algorithmic thinking skills for coding interviews.
+and algorithmic thinking skills for coding interviews. 
 
 ## Topics Covered
 
