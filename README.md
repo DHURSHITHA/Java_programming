@@ -8,7 +8,7 @@ and algorithmic thinking skills for coding interviews.
 
 - Arrays & Strings
 - Recursion
-- Backtracking
+- Backtracking 
 - Dynamic Programming
 - Linked Lists
 - Stacks & Queues
